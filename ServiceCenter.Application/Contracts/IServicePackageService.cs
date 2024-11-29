@@ -1,0 +1,54 @@
+﻿using ServiceCenter.Application.DTOS;
+using ServiceCenter.Core.Entities;
+using ServiceCenter.Core.Result;
+using ServiceCenter.Domain.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ServiceCenter.Application.Contracts;
+
+/// <summary>
+/// provides an interface for servicePackage-related services that manages servicePackage data across the application. Inherits from IApplicationService and IScopedService.
+/// </summary>
+public interface IServicePackageService : IApplicationService, IScopedService
+{
+    /// <summary>
+    /// function to add  ServicePackage  that take  ServicePackageDto   
+    /// </summary>
+    /// <param name="ServicePackageRequestDto">ServicePackage  request dto</param>
+    /// <returns> ServicePackage  added successfully </returns>
+    public Task<Result> AddServicePackageAsync(ServicePackageRequestDto ServicePackageRequestDto);
+    /// <summary>
+    /// function to get all ServicePackage  
+    /// </summary>
+    /// <returns>list all ServicePackage  response dto </returns>
+    public Task<Result<PaginationResult<ServicePackageResponseDto>>> GetAllServicePackageAsync(int itemCount,int index);
+    /// <summary>
+    /// function to delete ServicePackage  that take ServicePackage  id   
+    /// </summary>
+    /// <param name="id">ServicePackage  id</param>
+    /// <returns>ServicePackage  removed successfully </returns>
+    public Task<Result> DeleteServicePackageAsync(int id);
+    /// <summary>
+    /// function to update ServicePackage  that take ServicePackageRequestDto   
+    /// </summary>
+    /// <param name="id">ServicePackage id</param>
+    /// <param name="ServicePackageRequestDto">ServicePackage dto</param>
+    /// <returns>Updated ServicePackage </returns>
+    public Task<Result<ServicePackageResponseDto>> UpdateServicePackageAsync(int id, ServicePackageRequestDto ServicePackageRequestDto);
+    /// <summary>
+    /// function to get  ServicePackage  by id that take   ServicePackage id
+    /// </summary>
+    /// <param name="id"> ServicePackage  id</param>
+    /// <returns> ServicePackage  response dto</returns>
+    public Task<Result<ServicePackageGetByIdResponseDto>> GetServicePackageByIdAsync(int id);
+    /// <summary>
+    /// function to search by ServicePackage name  that take  ServicePackage name
+    /// </summary>
+    /// <param name="text">ServicePackage name</param>
+    /// <returns>ServicePackage response dto </returns>
+    public Task<Result<PaginationResult<ServicePackageResponseDto>>> SearchServicePackageByTextAsync(string text, int itemCount, int index);
+}
